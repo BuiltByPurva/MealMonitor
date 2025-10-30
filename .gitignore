@@ -198,17 +198,17 @@ verify-*.ps1
 !**/.dockerignore
 
 # Keep frontend source
-!mealmontor-frontend/src/
-!mealmontor-frontend/public/
-!mealmontor-frontend/package.json
-!mealmontor-frontend/package-lock.json
-!mealmontor-frontend/tsconfig.json
-!mealmontor-frontend/vite.config.ts
-!mealmontor-frontend/index.html
-!mealmontor-frontend/nginx.conf
+!mealmonitor-frontend/src/
+!mealmonitor-frontend/public/
+!mealmonitor-frontend/package.json
+!mealmonitor-frontend/package-lock.json
+!mealmonitor-frontend/tsconfig.json
+!mealmonitor-frontend/vite.config.ts
+!mealmonitor-frontend/index.html
+!mealmonitor-frontend/nginx.conf
 
 # Ignore frontend build output
-mealmontor-frontend/node_modules/
-mealmontor-frontend/dist/
-mealmontor-frontend/build/
+mealmonitor-frontend/node_modules/
+mealmonitor-frontend/dist/
+mealmonitor-frontend/build/
 

@@ -217,7 +217,7 @@ services:
 
   # React Frontend
   frontend:
-    build: ./mealmontor-frontend
+    build: mealmonitor-frontend
     container_name: mealmontor-frontend
     ports:
       - "3000:80"
