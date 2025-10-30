@@ -15,8 +15,8 @@ pipeline {
         stage('Verify Workspace') {
             steps {
                 script {
-                    bat 'pwd'
-                    bat 'ls -R'
+                    bat 'cd'
+                    bat 'dir /s'
                 }
             }
         }
@@ -70,7 +70,7 @@ pipeline {
                 script {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
                         bat '''
-                        export KUBECONFIG=$KUBECONFIG_FILE
+                        set KUBECONFIG=%KUBECONFIG_FILE%
                         kubectl apply -f k8s/
                         '''
                     }
