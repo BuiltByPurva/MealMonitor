@@ -12,23 +12,32 @@ pipeline {
             }
         }
 
+        stage('Verify Workspace') {
+            steps {
+                script {
+                    bat 'pwd'
+                    bat 'ls -R'
+                }
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 script {
                     def services = [
-                        'mealmonitor-user-service',
-                        'mealmonitor-canteen-service',
-                        'mealmonitor-review-service',
-                        'mealmonitor-notification-service',
-                        'mealmonitor-poll-service',
-                        'mealmonitor-gateway',
-                        'mealmonitor-eureka-server',
+                        'MealMonitor-UserService',
+                        'MealMonitor-CanteenService',
+                        'MealMonitor-ReviewService',
+                        'MealMonitor-NotificationService',
+                        'MealMonitor-PollService',
+                        'MealMonitor-Gateway',
+                        'MealMonitor-EurekaServer',
                         'mealmonitor-frontend'
                     ]
 
                     services.each { svc ->
                         echo "🚀 Building Docker image for ${svc}"
-                        bat "docker build -t ${DOCKERHUB_REPO}/${svc}:latest ${svc}/"
+                        bat "docker build -t ${DOCKERHUB_REPO}/${svc.toLowerCase()}:latest ${svc}/"
                     }
                 }
             }
@@ -37,21 +46,19 @@ pipeline {
         stage('Push Images to Docker Hub') {
             steps {
                 script {
-                // Jenkins Docker Hub credentials ID = 'dockerhub'
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         def services = [
-                            'mealmonitor-user-service',
-                            'mealmonitor-canteen-service',
-                            'mealmonitor-review-service',
-                            'mealmonitor-notification-service',
-                            'mealmonitor-poll-service',
-                            'mealmonitor-gateway',
-                            'mealmonitor-eureka-server',
+                            'MealMonitor-UserService',
+                            'MealMonitor-CanteenService',
+                            'MealMonitor-ReviewService',
+                            'MealMonitor-NotificationService',
+                            'MealMonitor-PollService',
+                            'MealMonitor-Gateway',
+                            'MealMonitor-EurekaServer',
                             'mealmonitor-frontend'
                         ]
                         services.each { svc ->
-                            echo "📤 Pushing image: ${DOCKERHUB_REPO}/${svc}:latest"
-                            bat "docker push ${DOCKERHUB_REPO}/${svc}:latest"
+                            bat "docker push ${DOCKERHUB_REPO}/${svc.toLowerCase()}:latest"
                         }
                     }
                 }
@@ -61,9 +68,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Jenkins credentials ID = 'kubeconfig'
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
-                        echo "📦 Deploying all services to Kubernetes..."
                         bat '''
                         export KUBECONFIG=$KUBECONFIG_FILE
                         kubectl apply -f k8s/
