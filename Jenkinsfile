@@ -25,13 +25,13 @@ pipeline {
             steps {
                 script {
                     def services = [
-                        'MealMonitor-User-Service',
-                        'MealMonitor-Canteen-Service',
-                        'MealMonitor-Review-Service',
-                        'MealMonitor-Notification-Service',
-                        'MealMonitor-Poll-Service',
+                        'MealMonitor-UserService',
+                        'MealMonitor-CanteenService',
+                        'MealMonitor-ReviewService',
+                        'MealMonitor-NotificationService',
+                        'MealMonitor-PollService',
                         'MealMonitor-Gateway',
-                        'MealMonitor-Eureka-Server',
+                        'MealMonitor-EurekaServer',
                         'mealmonitor-frontend'
                     ]
 
