@@ -1,0 +1,214 @@
+# ========================================
+# MealMonitor Microservices - .gitignore
+# ========================================
+
+# ========================================
+# Java / Maven
+# ========================================
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven target directories
+**/target/
+**/build/
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# ========================================
+# Spring Boot
+# ========================================
+# Spring Boot
+*.log
+*.gz
+*.tmp
+
+# ========================================
+# IDE - IntelliJ IDEA
+# ========================================
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# IntelliJ IDEA workspace files (keep project files)
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries
+.idea/shelf
+
+# ========================================
+# IDE - Eclipse
+# ========================================
+.classpath
+.project
+.settings/
+*.launch
+
+# ========================================
+# IDE - VSCode
+# ========================================
+.vscode/
+*.code-workspace
+
+# ========================================
+# Node / React (Frontend)
+# ========================================
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Production build
+/build
+/dist
+
+# Testing
+/coverage
+
+# Misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ========================================
+# Docker
+# ========================================
+# Don't ignore docker-compose files
+!docker-compose.yml
+!docker-compose.override.yml
+!Dockerfile
+
+# Docker volumes (if committed accidentally)
+docker-compose.override.yml.disabled
+
+# ========================================
+# Databases
+# ========================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ========================================
+# OS Files
+# ========================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ========================================
+# Logs
+# ========================================
+logs/
+*.log
+log/
+
+# ========================================
+# Temporary Files
+# ========================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~.nib
+*.bak
+*.orig
+
+# ========================================
+# Package Files
+# ========================================
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ========================================
+# Environment Variables
+# ========================================
+.env
+
+# ========================================
+# Documentation (Keep Important Docs)
+# ========================================
+# Keep important markdown files
+!README.md
+!QUICK_START.md
+!SERVICE_STARTUP_GUIDE.md
+
+# Ignore temporary documentation
+**/RUNNING_STATUS.md
+**/CURRENT_SYSTEM_STATUS.md
+**/FINAL_SYSTEM_STATUS.md
+**/CURRENT_SETUP.md
+
+# ========================================
+# Scripts (Keep Setup Scripts)
+# ========================================
+# Keep important setup scripts
+!build-services.ps1
+!restart-all.ps1
+!clean-rebuild-all.ps1
+!docker-compose*.yml
+
+# Ignore temporary fix scripts
+fix-*.ps1
+restart-docker-and-continue.ps1
+quick-fix-*.ps1
+verify-*.ps1
+**/stop-local-services.md
+
+# ========================================
+# Monitoring & Init Scripts (Keep These)
+# ========================================
+# Keep monitoring configurations
+!monitoring/
+!init-scripts/
+
+# ========================================
+# Project Specific
+# ========================================
+# Keep source code and resources
+!**/src/
+!**/pom.xml
+!**/Dockerfile
+!**/.dockerignore
+
+# Keep frontend source
+!mealmontor-frontend/src/
+!mealmontor-frontend/public/
+!mealmontor-frontend/package.json
+!mealmontor-frontend/package-lock.json
+!mealmontor-frontend/tsconfig.json
+!mealmontor-frontend/vite.config.ts
+!mealmontor-frontend/index.html
+!mealmontor-frontend/nginx.conf
+
+# Ignore frontend build output
+mealmontor-frontend/node_modules/
+mealmontor-frontend/dist/
+mealmontor-frontend/build/
+
