@@ -28,7 +28,7 @@ pipeline {
 
                     services.each { svc ->
                         echo "🚀 Building Docker image for ${svc}"
-                        sh "docker build -t ${DOCKERHUB_REPO}/${svc}:latest ${svc}/"
+                        bat "docker build -t ${DOCKERHUB_REPO}/${svc}:latest ${svc}/"
                     }
                 }
             }
@@ -51,7 +51,7 @@ pipeline {
                         ]
                         services.each { svc ->
                             echo "📤 Pushing image: ${DOCKERHUB_REPO}/${svc}:latest"
-                            sh "docker push ${DOCKERHUB_REPO}/${svc}:latest"
+                            bat "docker push ${DOCKERHUB_REPO}/${svc}:latest"
                         }
                     }
                 }
@@ -64,7 +64,7 @@ pipeline {
                     // Jenkins credentials ID = 'kubeconfig'
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
                         echo "📦 Deploying all services to Kubernetes..."
-                        sh '''
+                        bat '''
                         export KUBECONFIG=$KUBECONFIG_FILE
                         kubectl apply -f k8s/
                         '''
