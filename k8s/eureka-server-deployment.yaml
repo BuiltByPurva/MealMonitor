@@ -30,7 +30,7 @@ spec:
               value: "8761"
             - name: SPRING_PROFILES_ACTIVE
               value: docker
-          image: purvakamerkarjj5499079/mealmonitor-eureka-server:latest
+          image: purvakamerkarjj5499079/mealmonitor-eurekaserver:latest
           livenessProbe:
             exec:
               command:

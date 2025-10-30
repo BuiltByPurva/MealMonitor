@@ -36,7 +36,7 @@ spec:
               value: root
             - name: SPRING_PROFILES_ACTIVE
               value: docker
-          image: purvakamerkarjj5499079/mealmonitor-notification-service:latest
+          image: purvakamerkarjj5499079/mealmonitor-notificationservice:latest
           name: mealmontor-notification-service
           ports:
             - containerPort: 8089

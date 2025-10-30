@@ -36,7 +36,7 @@ spec:
               value: root
             - name: SPRING_PROFILES_ACTIVE
               value: docker
-          image: purvakamerkarjj5499079/mealmonitor-user-service:latest
+          image: purvakamerkarjj5499079/mealmonitor-userservice:latest
           name: mealmontor-user-service
           ports:
             - containerPort: 8084
