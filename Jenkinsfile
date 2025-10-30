@@ -25,13 +25,13 @@ pipeline {
             steps {
                 script {
                     def services = [
-                        'MealMonitor-UserService',
-                        'MealMonitor-CanteenService',
-                        'MealMonitor-ReviewService',
-                        'MealMonitor-NotificationService',
-                        'MealMonitor-PollService',
+                        'MealMonitor-User-Service',
+                        'MealMonitor-Canteen-Service',
+                        'MealMonitor-Review-Service',
+                        'MealMonitor-Notification-Service',
+                        'MealMonitor-Poll-Service',
                         'MealMonitor-Gateway',
-                        'MealMonitor-EurekaServer',
+                        'MealMonitor-Eureka-Server',
                         'mealmonitor-frontend'
                     ]
 
@@ -42,6 +42,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Push Images to Docker Hub') {
             steps {
