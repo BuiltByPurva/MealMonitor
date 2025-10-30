@@ -48,13 +48,13 @@ pipeline {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         def services = [
-                            'MealMonitor-UserService',
-                            'MealMonitor-CanteenService',
-                            'MealMonitor-ReviewService',
-                            'MealMonitor-NotificationService',
-                            'MealMonitor-PollService',
+                            'MealMonitor-User-Service',
+                            'MealMonitor-Canteen-Service',
+                            'MealMonitor-Review-Service',
+                            'MealMonitor-Notification-Service',
+                            'MealMonitor-Poll-Service',
                             'MealMonitor-Gateway',
-                            'MealMonitor-EurekaServer',
+                            'MealMonitor-Eureka-Server',
                             'mealmonitor-frontend'
                         ]
                         services.each { svc ->
