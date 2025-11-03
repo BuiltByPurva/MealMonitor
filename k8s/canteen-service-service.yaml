@@ -8,9 +8,11 @@ metadata:
     io.kompose.service: canteen-service
   name: canteen-service
 spec:
+  type: ClusterIP
   ports:
     - name: "8086"
       port: 8086
       targetPort: 8086
+      protocol: TCP
   selector:
     io.kompose.service: canteen-service

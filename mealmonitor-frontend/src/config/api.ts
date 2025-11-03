@@ -1,5 +1,7 @@
 // API Configuration
-export const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:31800';
+// Use empty string for relative URLs (works with nginx proxy in Docker)
+// For Kubernetes: Set REACT_APP_API_URL=http://localhost:31800 during build if needed
+export const API_BASE_URL = process.env.REACT_APP_API_URL || '';
 
 // API Endpoints
 export const API_ENDPOINTS = {
@@ -22,6 +24,11 @@ export const API_ENDPOINTS = {
   // Poll Service
   POLLS: `${API_BASE_URL}/api/polls`,
   POLLS_ACTIVE: `${API_BASE_URL}/api/polls/active`,
+  
+  // Moderation Service
+  MODERATION_FLAGS: `${API_BASE_URL}/api/moderation/flags`,
+  MODERATION_ISSUES: `${API_BASE_URL}/api/moderation/issues`,
+  MODERATION_LOGS: `${API_BASE_URL}/api/moderation/logs`,
 };
 
 // Helper function to get notification read endpoint
@@ -31,6 +38,10 @@ export const getNotificationReadUrl = (notificationId: string) =>
 // Helper function to get poll vote endpoint
 export const getPollVoteUrl = (pollId: string) => 
   `${API_BASE_URL}/api/polls/${pollId}/vote`;
+
+// Helper function to get moderation issue resolution endpoint
+export const getModerationResolutionUrl = (issueId: string) => 
+  `${API_BASE_URL}/api/moderation/issues/${issueId}/resolutions`;
 
 
 

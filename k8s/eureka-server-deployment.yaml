@@ -32,14 +32,21 @@ spec:
               value: docker
           image: purvakamerkarjj5499079/mealmonitor-eurekaserver:latest
           livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
-                - http://localhost:8761/actuator/health
-            failureThreshold: 5
+            httpGet:
+              path: /
+              port: 8761
+            initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8761
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
           name: mealmontor-eureka-server
           ports:
             - containerPort: 8761

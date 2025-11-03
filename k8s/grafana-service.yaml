@@ -8,6 +8,7 @@ metadata:
     io.kompose.service: grafana
   name: grafana
 spec:
+  type: LoadBalancer
   ports:
     - name: "3001"
       port: 3001

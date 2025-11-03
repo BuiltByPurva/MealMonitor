@@ -30,6 +30,7 @@ pipeline {
                         'MealMonitor-ReviewService',
                         'MealMonitor-NotificationService',
                         'MealMonitor-PollService',
+                        'MealMonitor-ModerationService',
                         'MealMonitor-Gateway',
                         'MealMonitor-EurekaServer',
                         'mealmonitor-frontend'
@@ -54,6 +55,7 @@ pipeline {
                             'MealMonitor-ReviewService',
                             'MealMonitor-NotificationService',
                             'MealMonitor-PollService',
+                            'MealMonitor-ModerationService',
                             'MealMonitor-Gateway',
                             'MealMonitor-EurekaServer',
                             'mealmonitor-frontend'

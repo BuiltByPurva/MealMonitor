@@ -25,6 +25,22 @@ spec:
             - name: STORAGE_TYPE
               value: mem
           image: openzipkin/zipkin:latest
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9411
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9411
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
           name: mealmontor-zipkin
           ports:
             - containerPort: 9411

@@ -8,9 +8,11 @@ metadata:
     io.kompose.service: zipkin
   name: zipkin
 spec:
+  type: LoadBalancer
   ports:
     - name: "9411"
       port: 9411
       targetPort: 9411
+      protocol: TCP
   selector:
     io.kompose.service: zipkin

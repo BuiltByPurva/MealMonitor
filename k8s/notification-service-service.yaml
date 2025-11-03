@@ -8,9 +8,11 @@ metadata:
     io.kompose.service: notification-service
   name: notification-service
 spec:
+  type: ClusterIP
   ports:
     - name: "8089"
       port: 8089
       targetPort: 8089
+      protocol: TCP
   selector:
     io.kompose.service: notification-service

@@ -2,16 +2,19 @@ package com.MealMonitor.pollservice.controller;
 
 import com.MealMonitor.pollservice.entity.Poll;
 import com.MealMonitor.pollservice.entity.PollOption;
+import com.MealMonitor.pollservice.entity.Vote;
 import com.MealMonitor.pollservice.repository.PollOptionRepository;
 import com.MealMonitor.pollservice.repository.PollRepository;
 import com.MealMonitor.pollservice.repository.VoteRepository;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -60,6 +63,38 @@ public class PollController {
                         option -> voteRepository.countByPollIdAndOptionId(pollId, option.getOptionId())
                 )
         );
+    }
+
+    @PostMapping("/{pollId}/vote")
+    public ResponseEntity<?> submitVote(@PathVariable String pollId, @Valid @RequestBody Vote vote) {
+        // Check if user has already voted
+        Optional<Vote> existingVote = voteRepository.findByUserIdAndPollId(vote.getUserId(), pollId);
+        if (existingVote.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Map.of("message", "User has already voted on this poll"));
+        }
+
+        // Verify option belongs to poll
+        Optional<PollOption> option = pollOptionRepository.findById(vote.getOptionId());
+        if (option.isEmpty() || !option.get().getPollId().equals(pollId)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("message", "Invalid option for this poll"));
+        }
+
+        // Create and save vote
+        vote.setPollId(pollId);
+        if (vote.getVoteId() == null || vote.getVoteId().isBlank()) {
+            vote.setVoteId(UUID.randomUUID().toString());
+        }
+        Vote saved = voteRepository.save(vote);
+        return ResponseEntity.created(URI.create("/polls/" + pollId + "/vote/" + saved.getVoteId())).body(saved);
+    }
+
+    @GetMapping("/active")
+    public List<Poll> getActivePolls() {
+        return pollRepository.findAll().stream()
+                .filter(poll -> Boolean.TRUE.equals(poll.getIsActive()))
+                .toList();
     }
 }
 
