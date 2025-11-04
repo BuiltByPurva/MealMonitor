@@ -9,6 +9,7 @@ metadata:
   name: eureka-server
 spec:
   type: LoadBalancer
+  loadBalancerIP: 34.59.41.93
   ports:
     - name: "8761"
       port: 8761

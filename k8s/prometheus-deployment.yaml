@@ -25,6 +25,11 @@ spec:
       containers:
         - image: prom/prometheus:latest
           name: mealmontor-prometheus
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
+
           ports:
             - containerPort: 9090
               protocol: TCP

@@ -9,6 +9,7 @@ metadata:
   name: zipkin
 spec:
   type: LoadBalancer
+  loadBalancerIP: 34.59.41.93
   ports:
     - name: "9411"
       port: 9411

@@ -1,4 +1,12 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-cm0
+  labels:
+    io.kompose.service: prometheus
+  annotations:
+    use-subpath: "true"
+
 data:
   prometheus.yml: |+
     global:
@@ -8,77 +16,77 @@ data:
         monitor: 'mealmonitor-monitor'
 
     scrape_configs:
-      # Eureka Server (Docker)
+      # Eureka Server
       - job_name: 'eureka-server'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8761']
+          - targets: ['eureka-server:8761']
             labels:
               application: 'MealMonitor-EurekaServer'
 
-      # API Gateway (Docker)
+      # API Gateway
       - job_name: 'gateway'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8080']
+          - targets: ['gateway:8080']
             labels:
               application: 'MealMonitor-Gateway'
 
-      # User Service (Running Locally)
+      # User Service
       - job_name: 'user-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8084']
+          - targets: ['user-service:8084']
             labels:
               application: 'MealMonitor-UserService'
 
-      # Canteen Service (Running Locally on port 8086, NOT running currently)
+      # Canteen Service
       - job_name: 'canteen-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8086']
+          - targets: ['canteen-service:8086']
             labels:
               application: 'MealMonitor-CanteenService'
 
-      # Review Service (Running Locally)
+      # Review Service
       - job_name: 'review-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8082']
+          - targets: ['review-service:8082']
             labels:
               application: 'MealMonitor-ReviewService'
 
-      # Notification Service (Running Locally)
+      # Notification Service
       - job_name: 'notification-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8089']
+          - targets: ['notification-service:8089']
             labels:
               application: 'MealMonitor-NotificationService'
 
-      # Poll Service (Running Locally)
+      # Poll Service
       - job_name: 'poll-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8087']
+          - targets: ['poll-service:8087']
             labels:
               application: 'MealMonitor-PollService'
 
-      # Moderation Service (Running Locally)
+      # Moderation Service
       - job_name: 'moderation-service'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['localhost:8088']
+          - targets: ['moderation-service:8088']
             labels:
               application: 'MealMonitor-ModerationService'
 
-      # Web App (Running Locally)
-      - job_name: 'web-app'
-        metrics_path: '/actuator/prometheus'
+      # Zipkin (optional - exposes /metrics)
+      - job_name: 'zipkin'
+        metrics_path: '/metrics'
         static_configs:
-          - targets: ['localhost:8085']
+          - targets: ['zipkin:9411']
             labels:
-              application: 'MealMonitor-WebApp'
+              application: 'Zipkin'
 
       # Prometheus itself
       - job_name: 'prometheus'
@@ -86,11 +94,3 @@ data:
           - targets: ['localhost:9090']
             labels:
               application: 'Prometheus'
-
-kind: ConfigMap
-metadata:
-  annotations:
-    use-subpath: "true"
-  labels:
-    io.kompose.service: prometheus
-  name: prometheus-cm0

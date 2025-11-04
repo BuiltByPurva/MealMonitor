@@ -9,6 +9,7 @@ metadata:
   name: frontend
 spec:
   type: LoadBalancer
+  loadBalancerIP: 34.59.41.93
   ports:
     - name: "31500"
       port: 31500

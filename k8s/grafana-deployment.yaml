@@ -30,6 +30,10 @@ spec:
               value: admin
           image: grafana/grafana:latest
           name: mealmontor-grafana
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
           ports:
             - containerPort: 3000
               protocol: TCP
