@@ -22,9 +22,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
+            
+            # 🔧 Build all microservices individually (each has its own pom.xml)
       - name: Build Spring Boot microservices
-        run: mvn clean package -DskipTests
+        run: |
+          mvn -f MealMonitor-EurekaServer/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-Gateway/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-UserService/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-CanteenService/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-ReviewService/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-NotificationService/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-PollService/pom.xml clean package -DskipTests
+          mvn -f MealMonitor-ModerationService/pom.xml clean package -DskipTests
 
       # 3️⃣ Log in to Docker Hub
       - name: Log in to Docker Hub
