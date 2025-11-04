@@ -91,6 +91,6 @@ data:
       # Prometheus itself
       - job_name: 'prometheus'
         static_configs:
-          - targets: ['localhost:9090']
+          - targets: ['prometheus:9090']
             labels:
               application: 'Prometheus'
